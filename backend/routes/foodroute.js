@@ -43,4 +43,28 @@ router.delete('/foods/:id', async (req, res) => {
   }
 });
 
+// update the  food item by ID
+
+router.put('/foods/:id', async (req, res) => {
+  const { id } = req.params;
+  const { pricePerKilo, unitsInKilos } = req.body;
+
+  try {
+    const updatedFood = await Food.findByIdAndUpdate(
+      id,
+      { pricePerKilo, unitsInKilos },
+      { new: true }
+    );
+
+    if (!updatedFood) {
+      return res.status(404).json({ message: 'Food item not found' });
+    }
+
+    res.json(updatedFood);
+  } catch (error) {
+    console.error('Error updating food item:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 module.exports = router;

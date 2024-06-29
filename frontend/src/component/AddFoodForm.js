@@ -1,8 +1,8 @@
-// src/components/AddFoodForm.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2'; // Consistent import name
+import { useNavigate } from 'react-router-dom';
+import './AddFoodForm.css'
 
 const AddFoodForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,8 @@ const AddFoodForm = () => {
     region: '',
     phoneNumber: '',
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +28,7 @@ const AddFoodForm = () => {
     axios.post('/food/foods', formData)
       .then(response => {
         console.log('Food item created:', response.data);
-        swal.fire({
+        Swal.fire({
           icon: 'success',
           title: 'Food item created successfully!',
           showConfirmButton: false,
@@ -42,11 +44,42 @@ const AddFoodForm = () => {
       })
       .catch(error => {
         console.error('Error creating food item:', error);
-        swal.fire({
+        Swal.fire({
           icon: 'error',
           title: 'Failed to create food item',
           text: error.message || 'An error occurred.',
         });
+      });
+  };
+
+  const handleLogout = () => {
+    axios.get('/auth/logout')
+      .then(res => {
+        if (res.data.status) {
+          Swal.fire({
+            title: 'Logged out successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            navigate('/');
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Logout failed',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      })
+      .catch(err => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error during logout',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        console.log('Error during logout:', err);
       });
   };
 
@@ -71,6 +104,7 @@ const AddFoodForm = () => {
 
         <button type="submit">Add Food</button>
       </form>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

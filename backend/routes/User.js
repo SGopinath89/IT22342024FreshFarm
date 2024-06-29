@@ -65,15 +65,15 @@ router.post('/forgotpassword', async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'priyamanthabandara.en01@gmail.com',
+        user: 'rashmikanaveen222@gmail.com',
         pass: 'apxs kcvx dvvz rnyg'
       }
     });
 
     var mailOptions = {
-      from: 'priyamanthabandara.en01@gmail.com',
+      from: 'rashmikanaveen222@gmail.com',
       to: `${email}`,
-      subject: 'Reset password - event management system',
+      subject: 'Reset password - farm food system',
       text: `http://localhost:5173/resetpassword/${token}`,
     };
 

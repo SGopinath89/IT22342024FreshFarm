@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './homeuser.css';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './homeUser.css'
 
 
 function Homescreen() {
@@ -10,6 +12,8 @@ function Homescreen() {
   const [searchKey, setSearchKey] = useState('');
   const [regionFilter, setRegionFilter] = useState('all');
   const [originalFoods, setOriginalFoods] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +49,38 @@ function Homescreen() {
     }
   };
 
+  const handleLogout = () => {
+    axios.get('/auth/logout')
+      .then(res => {
+        if (res.data.status) {
+          Swal.fire({
+            title: 'Logged out successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            navigate('/');
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Logout failed',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      })
+      .catch(err => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error during logout',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        console.log('Error during logout:', err);
+      });
+  };
+
+
   return (
     <div>
       
@@ -64,7 +100,10 @@ function Homescreen() {
             <select value={regionFilter} onChange={filterByRegion}>
               <option value='all'>All Regions</option>
               <option value='balangoda'>balangoda</option>
-              <option value='Region2'>Region 2</option>
+              <option value='jaffna'>jaffna</option>
+              <option value='vavuniya'>vavuniya</option>
+              <option value='nuwaraeliya'>nuwaraeliya</option>
+              <option value='monaragala'>monaragala</option>
               {/* Add more options as needed */}
             </select>
           </div>
@@ -91,6 +130,8 @@ function Homescreen() {
           )}
         </div>
       </div>
+
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }

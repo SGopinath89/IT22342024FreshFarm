@@ -1,0 +1,101 @@
+.all-foods-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .all-foods-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .all-foods-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .all-foods-container li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .all-foods-container li strong {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .all-foods-container li p {
+    margin: 5px 0;
+  }
+  
+  .all-foods-container li button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .all-foods-container li button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .all-foods-container div {
+    margin-top: 10px;
+  }
+  
+  .all-foods-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .all-foods-container input[type="text"],
+  .all-foods-container input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .all-foods-container input[type="text"]:focus,
+  .all-foods-container input[type="number"]:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 5px #66afe9;
+  }
+  
+  .all-foods-container button[type="submit"],
+  .all-foods-container button[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .all-foods-container button[type="submit"]:hover,
+  .all-foods-container button[type="button"]:hover {
+    background-color: #45a049;
+  }
+  
+  .all-foods-container button[type="submit"]:disabled,
+  .all-foods-container button[type="button"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
