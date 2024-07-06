@@ -50,3 +50,4 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(err)
   })
   
+//mongodb+srv://rash1:rash1@cluster0.25gh5ty.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
