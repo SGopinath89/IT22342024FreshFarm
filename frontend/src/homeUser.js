@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import './homeUser.css'
-
+import './homeUser.css';
 
 function Homescreen() {
   const [foods, setFoods] = useState([]);
@@ -32,22 +31,25 @@ function Homescreen() {
     fetchData();
   }, []);
 
-  const filterBySearch = () => {
-    const filteredFoods = originalFoods.filter(food =>
-      food.foodName.toLowerCase().includes(searchKey.toLowerCase())
-    );
-    setFoods(filteredFoods);
-  };
+  const filterFoods = useCallback(() => {
+    let filteredFoods = originalFoods;
 
-  const filterByRegion = (e) => {
-    setRegionFilter(e.target.value);
-    if (e.target.value === 'all') {
-      setFoods(originalFoods);
-    } else {
-      const filteredFoods = originalFoods.filter(food => food.region === e.target.value);
-      setFoods(filteredFoods);
+    if (searchKey) {
+      filteredFoods = filteredFoods.filter(food =>
+        food.foodName.toLowerCase().includes(searchKey.toLowerCase())
+      );
     }
-  };
+
+    if (regionFilter !== 'all') {
+      filteredFoods = filteredFoods.filter(food => food.region === regionFilter);
+    }
+
+    setFoods(filteredFoods);
+  }, [searchKey, regionFilter, originalFoods]);
+
+  useEffect(() => {
+    filterFoods();
+  }, [searchKey, regionFilter, filterFoods]);
 
   const handleLogout = () => {
     axios.get('/auth/logout')
@@ -80,10 +82,8 @@ function Homescreen() {
       });
   };
 
-
   return (
     <div>
-      
       <div className="container">
         <div className='row mt-5 bs'>
           <div className='col-md-5'>
@@ -93,11 +93,10 @@ function Homescreen() {
               placeholder='Search food'
               value={searchKey}
               onChange={(e) => setSearchKey(e.target.value)}
-              onKeyUp={filterBySearch}
             />
           </div>
           <div className="col-md-4">
-            <select value={regionFilter} onChange={filterByRegion}>
+            <select value={regionFilter} onChange={(e) => setRegionFilter(e.target.value)}>
               <option value='all'>All Regions</option>
               <option value='balangoda'>balangoda</option>
               <option value='jaffna'>jaffna</option>
@@ -112,21 +111,21 @@ function Homescreen() {
         <div className="mt-5">
           {loading ? (
             <div>Loading...</div>
+          ) : error ? (
+            <div>Error loading food items.</div>
+          ) : foods.length === 0 ? (
+            <div>No food items found.</div>
           ) : (
-            foods.length === 0 ? (
-              <div>No food items found.</div>
-            ) : (
-              foods.map(food => (
-                <div className="food-card" key={food._id}>
-                  <h3>{food.foodName}</h3>
-                  <p>Price: ${food.pricePerKilo} per kilo</p>
-                  <p>Units: {food.unitsInKilos} kilos</p>
-                  <p>Region: {food.region}</p>
-                  <p>Contact: {food.phoneNumber}</p>
-                  {/* Add delete button here if needed */}
-                </div>
-              ))
-            )
+            foods.map(food => (
+              <div className="food-card" key={food._id}>
+                <h3>{food.foodName}</h3>
+                <p>Price: ${food.pricePerKilo} per kilo</p>
+                <p>Units: {food.unitsInKilos} kilos</p>
+                <p>Region: {food.region}</p>
+                <p>Contact: {food.phoneNumber}</p>
+                {/* Add delete button here if needed */}
+              </div>
+            ))
           )}
         </div>
       </div>
