@@ -1,70 +1,82 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .bs {
-    background-color: #4CAF50;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .col-md-5 input[type='text'] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .col-md-4 select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .food-card {
-    background-color: #E8F5E9;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .food-card h3 {
-    color: #388E3C;
-    margin-bottom: 10px;
-  }
-  
-  .food-card p {
-    margin: 5px 0;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-bar {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.bs {
+  background-color: #4CAF50;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.col-md-5 input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.col-md-4 select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.food-list {
+  margin-top: 20px;
+}
+
+.food-card {
+  background-color: #E8F5E9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.food-card h3 {
+  color: #388E3C;
+  margin-bottom: 10px;
+}
+
+.food-card p {
+  margin: 5px 0;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}

@@ -85,30 +85,36 @@ function Homescreen() {
   return (
     <div>
       <div className="container">
-        <div className='row mt-5 bs'>
-          <div className='col-md-5'>
-            <input
-              type='text'
-              className='form-control'
-              placeholder='Search food'
-              value={searchKey}
-              onChange={(e) => setSearchKey(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4">
-            <select value={regionFilter} onChange={(e) => setRegionFilter(e.target.value)}>
-              <option value='all'>All Regions</option>
-              <option value='balangoda'>balangoda</option>
-              <option value='jaffna'>jaffna</option>
-              <option value='vavuniya'>vavuniya</option>
-              <option value='nuwaraeliya'>nuwaraeliya</option>
-              <option value='monaragala'>monaragala</option>
-              {/* Add more options as needed */}
-            </select>
+        <div className='search-bar'>
+          <div className="row mt-5 bs">
+            <div className="col-md-5">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search food"
+                value={searchKey}
+                onChange={(e) => setSearchKey(e.target.value)}
+              />
+            </div>
+            <div className="col-md-4">
+              <select
+                className="form-control"
+                value={regionFilter}
+                onChange={(e) => setRegionFilter(e.target.value)}
+              >
+                <option value="all">All Regions</option>
+                <option value="balangoda">Balangoda</option>
+                <option value="jaffna">Jaffna</option>
+                <option value="vavuniya">Vavuniya</option>
+                <option value="nuwaraeliya">Nuwara Eliya</option>
+                <option value="monaragala">Monaragala</option>
+                {/* Add more options as needed */}
+              </select>
+            </div>
           </div>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-5 food-list">
           {loading ? (
             <div>Loading...</div>
           ) : error ? (
@@ -116,16 +122,20 @@ function Homescreen() {
           ) : foods.length === 0 ? (
             <div>No food items found.</div>
           ) : (
-            foods.map(food => (
-              <div className="food-card" key={food._id}>
-                <h3>{food.foodName}</h3>
-                <p>Price: ${food.pricePerKilo} per kilo</p>
-                <p>Units: {food.unitsInKilos} kilos</p>
-                <p>Region: {food.region}</p>
-                <p>Contact: {food.phoneNumber}</p>
-                {/* Add delete button here if needed */}
-              </div>
-            ))
+            <div className="row">
+              {foods.map(food => (
+                <div className="col-md-4" key={food._id}>
+                  <div className="food-card">
+                    <h3>{food.foodName}</h3>
+                    <p>Price: ${food.pricePerKilo} per kilo</p>
+                    <p>Units: {food.unitsInKilos} kilos</p>
+                    <p>Region: {food.region}</p>
+                    <p>Contact: {food.phoneNumber}</p>
+                    {/* Add delete button here if needed */}
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
